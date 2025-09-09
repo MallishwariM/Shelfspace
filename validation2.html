@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>REGISTRATION PAGE VALIDATION</title>
+<script language="javascript">
+
+// Username validation
+function UnameValidation() {
+    var fname = document.forms["regform"].fname.value.trim();
+    var splchar = "!@#$%^&*()+=-[]\\';,./{}|\":<>?~";
+    if (fname.length < 6) {
+        alert("⚠️ First name must have at least 6 characters");
+        return false;
+    }
+    for (var i = 0; i < fname.length; i++) {
+        if (splchar.indexOf(fname.charAt(i)) != -1) {
+            alert("⚠️ First name should not contain special characters");
+            return false;
+        }
+    }
+    return true;
+}
+
+// Password validation
+function pwdvalidation() {
+    var pw = document.forms["regform"].pwd.value;
+    var cpw = document.forms["regform"].cpwd.value;
+    if (pw.length < 6) {
+        alert("⚠️ Password must contain at least 6 characters");
+        return false;
+    }
+    if (pw != cpw) {
+        alert("⚠️ Passwords do not match");
+        return false;
+    }
+    alert("✅ Password validation successful");
+    return true;
+}
+
+// Email validation
+function emailvalidation() {
+    var emailid = document.forms["regform"].email.value.trim();
+    var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!pattern.test(emailid)) {
+        alert("⚠️ Given email ID is invalid");
+        return false;
+    }
+    alert("✅ Email ID is valid");
+    return true;
+}
+
+// Phone number validation
+function phnovalidation() {
+    var ph = document.forms["regform"].phno.value.trim();
+    if (!/^\d{10}$/.test(ph)) {
+        alert("⚠️ Please enter a valid 10-digit phone number");
+        return false;
+    }
+    alert("✅ Phone number is valid");
+    return true;
+}
+
+// Form validation on submit
+function validateForm() {
+    if (!UnameValidation()) return false;
+    if (!pwdvalidation()) return false;
+    if (!emailvalidation()) return false;
+    if (!phnovalidation()) return false;
+    return true;
+}
+
+</script>
+</head>
+<body bgcolor="pink">
+<center>
+<h2>ONLINE REGISTRATION PAGE</h2><br>
+
+<form name="regform" action="Login.html" method="post" onsubmit="return validateForm()">
+<h3>
+First Name: <input type="text" maxlength="20" size="25" name="fname" onblur="UnameValidation()"><br><br>
+Last Name: <input type="text" maxlength="20" size="25" name="lname"><br><br>
+Password: <input type="password" maxlength="20" size="25" name="pwd"><br><br>
+Confirm Password: <input type="password" maxlength="20" size="25" name="cpwd" onblur="pwdvalidation()"><br><br>
+Gender: <input type="radio" name="gender" value="male" /> Male
+<input type="radio" name="gender" value="female"/> Female<br><br>
+Email ID: <input type="text" maxlength="40" size="35" name="email" onblur="emailvalidation()"><br><br>
+Phone Number: <input type="text" maxlength="10" size="25" name="phno" onblur="phnovalidation()"><br><br>
+<input type="submit" value="SUBMIT">
+<input type="reset" value="RESET">
+</h3>
+</form>
+</center>
+</body>
+</html>
